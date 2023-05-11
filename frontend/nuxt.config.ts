@@ -8,5 +8,10 @@ export default defineNuxtConfig({
             tailwindcss: {},
             autoprefixer: {},
         },
+    },
+    runtimeConfig: {
+        public: {
+            apiBase: process.env.BACK_URL
+        }
     }
 })
