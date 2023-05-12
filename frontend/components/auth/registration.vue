@@ -48,17 +48,23 @@
 <script setup>
 import { ref } from 'vue'
 
-const runtimeConfig = useRuntimeConfig()
+const { $post } = useNuxtApp()
 
 const login = ref('')
 const email = ref('')
 const password = ref('')
 
 const registration = async () => {
-  const { data } = await $fetch(`${runtimeConfig.public.apiBase}/apiUsers/users`, {
-    method: 'POST',
-    body: { login: login.value, email: email.value, password: password.value }
-  })
-  console.log(data)
+  try {
+    const payload = {
+      login: login.value,
+      email: email.value,
+      password: password.value
+    }
+    const { data } = await $post('/apiUsers/registration', payload)
+    console.log(data)
+  } catch (e) {
+    console.log(e)
+  }
 }
 </script>

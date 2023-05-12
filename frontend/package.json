@@ -14,5 +14,8 @@
     "nuxt": "^3.4.3",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2"
+  },
+  "dependencies": {
+    "nuxt-storage": "^1.2.2"
   }
 }

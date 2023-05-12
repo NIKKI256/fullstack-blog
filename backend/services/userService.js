@@ -7,6 +7,9 @@ class userService {
     getAll () {
         return User.find()
     }
+    findByField (field, value) {
+        return User.findOne({ [field]: value })
+    }
 }
 
 module.exports = new userService()
