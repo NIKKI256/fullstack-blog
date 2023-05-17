@@ -19,7 +19,7 @@ export default defineNuxtPlugin(nuxt => {
     return {
         provide: {
             get: async (url: string) => {
-                return await $fetch(`${BASE_URL}${url}`, { method: "GET", headers})
+                return await $fetch(`${BASE_URL}${url}`, { method: "GET", headers })
             },
             post: async (url: string, payload: object) => {
                 return await $fetch(`${BASE_URL}${url}`, {

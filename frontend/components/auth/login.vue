@@ -27,7 +27,7 @@
         </div>
 
         <div>
-          <button @click="login" type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+          <button @click="login" :disabled="checkPrimitiveArgs(email, password)" type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:cursor-not-allowed disabled:hover:bg-indigo-600">Sign in</button>
         </div>
       </div>
 
@@ -41,8 +41,10 @@
 <script setup>
 import { ref } from 'vue'
 import nuxtStorage from 'nuxt-storage'
+import { useCheckEmptyArgs } from '../../composables/checkEmptyArgs'
 
 const { $post } = useNuxtApp()
+const { checkPrimitiveArgs } = useCheckEmptyArgs()
 
 const email = ref('')
 const password = ref('')
@@ -56,7 +58,8 @@ const login = async () => {
     const { token } = await $post('/apiUsers/login', payload)
     nuxtStorage.localStorage.setData('token', token, 24, 'h')
   } catch (e) {
-    console.log(e)
+    const { message } = e.data
+    console.error(message)
   }
 }
 </script>
